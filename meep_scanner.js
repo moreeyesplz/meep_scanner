@@ -11,7 +11,7 @@ function dispatch_meep(commit, repo) {
         const body = JSON.stringify({
             user: commit.author.username,
             repo: repo,
-            message: commit.message,
+            message: Buffer.from(commit.message, 'utf8').toString('base64'),
             id: commit.id,
         });
 
