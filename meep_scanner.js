@@ -17,7 +17,7 @@ function dispatch_meep(commit, repo) {
 
         const req = https.request({
             host: 'us-central1-gentle-cable-286422.cloudfunctions.net',
-            path: 'meeper',
+            path: '/meeper',
             method: 'POST',
             headers: {
                 'User-Agent': 'meep-action',
@@ -85,8 +85,6 @@ try {
             dispatches.push(dispatch_meep(commit, github.context.repo));
         }
     }
-
-    console.log(JSON.stringify(payload, undefined, 2));
 
     Promise.all(dispatches).then(() => {
         console.log(`${dispatches.length} MEEP${dispatches.length > 1 ? 's' : ''} dispatched!`);
