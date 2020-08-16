@@ -56,9 +56,16 @@ try {
         repo: github.context.repo,
         name: 'MEEP',
     }).then((value) => {
-        console.log(value);
+        console.log('MEEP label already created.');
     }).catch((e) => {
-        console.error(e);
+        // Label not found. Create it
+        octokit.issues.createLabel({
+            owner: github.context.owner,
+            repo: github.context.repo,
+            name: 'MEEP',
+            color: '3f51b5',
+            description: 'More eyes, plz!',
+        })
     });
 
     const dispatches = [];
