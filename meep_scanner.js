@@ -41,6 +41,28 @@ function dispatch_meep(commit, repo) {
     })
 }
 
+async function meep_label(context) {
+    // Check if the MEEP issue label has been created
+    const token = core.getInput('github_token', { required: true });
+    const octokit = github.getOctokit(token);
+    octokit.issues.getLabel({
+        owner: context.owner,
+        repo: context.repo,
+        name: 'MEEP',
+    }).then((value) => {
+        console.log('MEEP label already created.');
+    }).catch((e) => {
+        // Label not found. Create it
+        octokit.issues.createLabel({
+            owner: context.owner,
+            repo: context.repo,
+            name: 'MEEP',
+            color: '3f51b5',
+            description: 'More eyes, plz!',
+        })
+    });
+}
+
 try {
     const payload = github.context.payload;
     if (!payload.commits) {
@@ -48,25 +70,8 @@ try {
         process.exit(0);
     }
 
-    // Check if the MEEP issue label has been created
-    const token = core.getInput('github_token');
-    const octokit = github.getOctokit(token);
-    octokit.issues.getLabel({
-        owner: github.context.owner,
-        repo: github.context.repo,
-        name: 'MEEP',
-    }).then((value) => {
-        console.log('MEEP label already created.');
-    }).catch((e) => {
-        // Label not found. Create it
-        octokit.issues.createLabel({
-            owner: github.context.owner,
-            repo: github.context.repo,
-            name: 'MEEP',
-            color: '3f51b5',
-            description: 'More eyes, plz!',
-        })
-    });
+    // NOTE: It appears that the GITHUB_TOKEN provided does not yet permit label creation
+    // meep_label(github.context);
 
     const dispatches = [];
 
