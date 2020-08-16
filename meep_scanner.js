@@ -48,7 +48,8 @@ try {
     }
 
     // Check if the MEEP issue label has been created
-    const octokit = github.getOctokit(core.getInput('github_token'))
+    const token = core.getInput('github_token');
+    const octokit = github.getOctokit(token);
     octokit.issues.getLabel({
         owner: github.context.owner,
         repo: github.context.repo,
@@ -70,8 +71,7 @@ try {
         }
     }
 
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`Event payload: ${payload}`);
+    console.log(JSON.stringify(payload, undefined, 2));
 
     Promise.all(dispatches).then(() => {
         console.log(`${dispatches.length} MEEP${dispatches.length > 1 ? 's' : ''} dispatched!`);
