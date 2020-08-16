@@ -6,10 +6,11 @@ const https = require('https');
 // scanned for the tag [MEEP]. If identified, the meep is submitted
 // for tracking which will eventually open a meep issue.
 
-function dispatch_meep(commit) {
+function dispatch_meep(commit, repo) {
     return new Promise((resolve) => {
         const body = JSON.stringify({
             user: commit.author.username,
+            repo: repo,
             message: commit.message,
             id: commit.id,
         });
@@ -56,6 +57,8 @@ try {
         name: 'MEEP',
     }).then((value) => {
         console.log(value);
+    }).catch((e) => {
+        console.error(e);
     });
 
     const dispatches = [];
@@ -67,7 +70,7 @@ try {
         const message = commit.message;
         if (message.includes('[MEEP]')) {
             // Dispatch a cloud function to track the request
-            dispatches.push(dispatch_meep(commit));
+            dispatches.push(dispatch_meep(commit, github.context.repo));
         }
     }
 
@@ -75,7 +78,7 @@ try {
 
     Promise.all(dispatches).then(() => {
         console.log(`${dispatches.length} MEEP${dispatches.length > 1 ? 's' : ''} dispatched!`);
-    })
+    });
 } catch (e) {
     core.setFailed(e.message);
 }
