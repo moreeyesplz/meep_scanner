@@ -14,6 +14,7 @@ function dispatch_meep(commit, repo) {
             message: Buffer.from(commit.message, 'utf8').toString('base64'),
             id: commit.id,
         });
+        console.log(body);
 
         const req = https.request({
             host: 'us-central1-gentle-cable-286422.cloudfunctions.net',
