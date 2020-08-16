@@ -1,0 +1,9 @@
+name: MEEP Scanner
+author: moreeyesplz
+description: 'Scans commit messages for MEEPs and submits them'
+runs:
+  using: 'node12'
+  main: 'meep_scanner.js'
+branding:
+  icon: eye
+  color: purple

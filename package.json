@@ -1,0 +1,24 @@
+{
+  "name": "meep_scanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "meep_scanner.js",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moreeyesplz/meep_scanner.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moreeyesplz/meep_scanner/issues"
+  },
+  "homepage": "https://github.com/moreeyesplz/meep_scanner#readme"
+}
