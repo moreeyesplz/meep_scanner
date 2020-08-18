@@ -5,5 +5,5 @@ runs:
   using: 'node12'
   main: 'meep_scanner.js'
 branding:
-  icon: eye
-  color: purple
+  icon: search
+  color: blue
