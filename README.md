@@ -1,6 +1,8 @@
 # MEEP Scanner
 
-The *MEEP Scanner* is a lightweight action that integrates with the [More Eyes, Plz!](https://moreeyesplz.com) service. When installed in a repository, the scanner scans commit messages for the `[MEEP]` string. When present, the commit becomes indexed in the MEEP database for others in the community to discover.
+The *MEEP Scanner* is a lightweight action that integrates with the [More Eyes, Plz!](https://moreeyesplz.com) service. When installed in a repository, the scanner scans commit messages for the `[MEEP]` or `[meep]` string. When present, the commit becomes indexed in the MEEP database for others in the community to discover.
+
+Note that this action only works on repositories that are *public* at this time. Without public visibility, outside members of the community will not be able to view your commits to provide feedback.
 
 ## Usage
 

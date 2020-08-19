@@ -52,12 +52,19 @@ try {
 
     const dispatches = [];
 
+    // Check if this is a public repo
+    const is_private = payload.repository.private
+
     for (let i = 0; i !== payload.commits.length; ++i) {
         const commit = payload.commits[i];
 
-        // Parse commit text for MEEP requests
+        // Parse commit text for MEEP/meep requests
         const message = commit.message;
-        if (message.includes('[MEEP]')) {
+        if (message.includes('[MEEP]') || message.includes('[meep]')) {
+            if (is_private) {
+                core.setFailed(`It looks like you've requested more eyes on a commit but your repository isn't marked "public." Please change the visibility of your repository to "public" in order to meep. Thanks!`);
+            }
+
             // Dispatch a cloud function to track the request
             dispatches.push(dispatch_meep(commit, github.context.repo));
         }
