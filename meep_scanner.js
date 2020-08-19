@@ -63,6 +63,7 @@ try {
         if (message.includes('[MEEP]') || message.includes('[meep]')) {
             if (is_private) {
                 core.setFailed(`It looks like you've requested more eyes on a commit but your repository isn't marked "public." Please change the visibility of your repository to "public" in order to meep. Thanks!`);
+                process.exit(1);
             }
 
             // Dispatch a cloud function to track the request
