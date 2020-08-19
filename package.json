@@ -1,6 +1,6 @@
 {
   "name": "meep_scanner",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "meep_scanner.js",
   "dependencies": {
