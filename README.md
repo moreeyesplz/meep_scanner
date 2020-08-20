@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: moreeyesplz/meep_scanner@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 This will cause the scanner to run each time you push to the repository.

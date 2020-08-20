@@ -4,6 +4,10 @@ description: 'Scans commit messages for MEEPs and submits them'
 runs:
   using: 'node12'
   main: 'meep_scanner.js'
+inputs:
+  github-token:
+    description: 'Sourced from secrets.GITHUB_TOKEN'
+    required: true
 branding:
   icon: search
   color: blue

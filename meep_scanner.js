@@ -6,20 +6,25 @@ const https = require('https');
 // scanned for the tag [MEEP]. If identified, the meep is submitted
 // for tracking which will eventually open a meep issue.
 
-const octokit = github.getOctokit()
+const token = core.getInput('github-token');
+if (!token) {
+    core.setFailed('Workflow input github-token not set. Please add this as specified in the README at https://github.com/moreeyesplz/meep_scanner Thanks!');
+    process.exit(1);
+}
+const octokit = github.getOctokit(token);
 
 function dispatch_meep(commit, repo) {
     return new Promise(async (resolve) => {
         // First, check that themeepbot[bot] hasn't already commented on this
         // commit
-        const { commit_comments } = await octokit.repos.listCommentsForCommit({
+        const { data } = await octokit.repos.listCommentsForCommit({
             owner: repo.owner,
             repo: repo.repo,
             commit_sha: commit.id,
         });
 
-        for (let i = 0; i !== commit_comments.length; ++i) {
-            const comment = commit_comments[i];
+        for (let i = 0; i !== data.length; ++i) {
+            const comment = data[i];
             if (comment.user.login === 'themeepbot[bot]') {
                 // We've already indexed this issue.
                 resolve();
