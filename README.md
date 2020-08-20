@@ -33,9 +33,9 @@ jobs:
 
 This will cause the scanner to run each time you push to the repository.
 
-### 3. Tag commits you'd like feedback on with `[MEEP]`
+### 3. Tag commits you'd like feedback on with `[MEEP]` or `[meep]`
 
-When you write a commit you'd like another set of eyes on, include the text `[MEEP]` somewhere in your commit message. For best results, it's recommended that you:
+When you write a commit you'd like another set of eyes on, include the text `[MEEP]` or `[meep]` somewhere in your commit message. For best results, it's recommended that you:
 
 - DO include some context about what you'd like insight on
 - DON'T request feedback on overly trivial changes
